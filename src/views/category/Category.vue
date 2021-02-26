@@ -151,7 +151,7 @@
 
 <style scoped>
   .wrapper {
-    height: 150px;
+    height: 300px;
     background-color: red;
 
     overflow: hidden;

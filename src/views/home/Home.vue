@@ -18,8 +18,8 @@
                    @tabClick="tabClick"
                    ref="tabControl2"/>
       <good-list :goods="showGoods"/>
-    </scroll>
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
+    </scroll>
   </div>
 </template>
 
@@ -169,7 +169,8 @@
     background-color: #FF4001;
     /* background-color: var(--color-tint); */
     color: #fff;
-    /*在使用浏览器原生滚动时, 为了让导航不跟随一起滚动*/
+    
+    /*在使用浏览器原生滚动时, 为了让导航不跟随一起滚动，才这样写的*/
     /*position: fixed;*/
     /*left: 0;*/
     /*right: 0;*/
@@ -178,7 +179,6 @@
   }
   .content {
     overflow: hidden;
-
     position: absolute;
     top: 44px;
     bottom: 49px;
