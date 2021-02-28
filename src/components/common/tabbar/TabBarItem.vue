@@ -14,7 +14,9 @@
       path: String,
       activeColor: {
         type: String,
-        default: 'red'
+        // default: 'red'
+        default: '#1A73E8'
+
       }
     },
     data() {
@@ -32,6 +34,7 @@
       },
       activeStyle() {
         return this.isActive ? {color: this.activeColor} : {}
+        // return this.isActive ? {color: this.activeColor} : {}
       }
     },
     methods: {

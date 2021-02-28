@@ -52,7 +52,8 @@
   }
 
   .active {
-    color: var(--color-high-text)
+    color: #1A73E8
+    /* color: var(--color-high-text) */
   }
 
   .back img {

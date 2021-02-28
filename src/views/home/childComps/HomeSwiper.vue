@@ -1,6 +1,8 @@
 <template>
   <swiper>
-    <swiper-item v-for="item in banners" :key="item">
+    <swiper-item v-for="(item, key) in banners" :key="key">
+    <!-- <swiper-item v-for="item in banners" :key="item"> -->
+
       <a :href="item.link">
         <img :src="item.image" alt="" @load="imageLoad">
       </a>
@@ -17,7 +19,7 @@
       banners: {
         type: Array,
         default() {
-          return []
+        return []
         }
       }
     },

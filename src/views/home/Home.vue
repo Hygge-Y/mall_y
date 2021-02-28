@@ -1,6 +1,6 @@
 <template>
   <div id="home" class="wrapper">
-    <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
+    <nav-bar class="home-nav"><div slot="center">小杨购物街</div></nav-bar>
     <tab-control :titles="['流行', '新款', '精选']"
                  @tabClick="tabClick"
                  ref="tabControl1"
@@ -37,8 +37,11 @@
   import Scroll from 'components/common/scroll/Scroll'
   import BackTop from 'components/content/backTop/BackTop'
 
-  import { getHomeMultidata, getHomeGoods } from "network/home"
-  import {debounce} from "common/utils";
+  import {getHomeMultidata, getHomeGoods } from "network/home"
+  import {debouce} from "common/utils";
+  import {BACK_POSITION} from "common/const";
+  import {itemListenerMixin} from 'common/mixin'
+
 
   export default {
     name: "Home",
@@ -52,6 +55,7 @@
       Scroll,
       BackTop
     },
+    mixins: [itemListenerMixin],
     data() {
       return {
         banners: [],
@@ -61,11 +65,13 @@
           'new': {page: 0, list: []},
           'sell': {page: 0, list: []},
         },
+        // showGoods: [],
         currentType: 'pop',
         isShowBackTop: false,
         tabOffsetTop: 0,
         isTabFixed: false,
-        saveY: 0
+        saveY: 0,
+        // itemImgListener: null
       }
     },
     computed: {
@@ -81,7 +87,11 @@
       this.$refs.scroll.refresh()
     },
     deactivated() {
+      //1.保存Y值
       this.saveY = this.$refs.scroll.getScrollY()
+
+      //2.取消全局事件的监听
+      this.$bus.$off('itemImgLoad', this.itemImgListener )
     },
     created() {
       // 1.请求多个数据
@@ -93,11 +103,15 @@
       this.getHomeGoods('sell')
     },
     mounted() {
-      // 1.图片加载完成的事件监听
-      const refresh = debounce(this.$refs.scroll.refresh, 50)
-      this.$bus.$on('itemImageLoad', () => {
-        refresh()
-      })
+      // // 1.图片加载完成的事件监听
+      // const refresh = debounce(this.$refs.scroll.refresh, 50)
+      // //对监听的事件做一个保存
+      // this.itemImgListener = () => {
+      //   refresh()
+      // }
+      // this.$bus.$on('itemImageLoad', this.itemImgListener)
+      //手动代码点击一次
+      this.tabClick(0)
     },
     methods: {
       /**
@@ -115,6 +129,7 @@
             this.currentType = 'sell'
             break
         }
+        //让两个tabcontrol的currentIndex保持一致
         this.$refs.tabControl1.currentIndex = index;
         this.$refs.tabControl2.currentIndex = index;
       },
@@ -166,7 +181,7 @@
   }
 
   .home-nav {
-    background-color: #FF4001;
+    background-color: #1A73E8;
     /* background-color: var(--color-tint); */
     color: #fff;
     

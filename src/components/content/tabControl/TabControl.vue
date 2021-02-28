@@ -54,10 +54,12 @@
   }
 
   .active {
-    color: var(--color-high-text);
+     color: #1A73E8
+    /* color: var(--color-high-text); */
   }
 
   .active span {
-    border-bottom: 3px solid var(--color-tint);
+    border-bottom: 3px solid #1A73E8;
+    /* border-bottom: 3px solid var(--color-tint); */
   }
 </style>
