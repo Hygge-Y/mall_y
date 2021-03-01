@@ -64,7 +64,7 @@ export const backTopMixin = {
     },
     data() {
       return {
-        isShowBackTop: true
+        isShowBackTop: false
       }
     },
     methods: {

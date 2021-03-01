@@ -39,8 +39,8 @@
 
   import {getHomeMultidata, getHomeGoods } from "network/home"
   import {debouce} from "common/utils";
-  import {BACK_POSITION} from "common/const";
   import {itemListenerMixin, backTopMixin} from 'common/mixin'
+  import {BACK_POSITION} from "common/const";
 
 
   export default {
@@ -53,7 +53,7 @@
       TabControl,
       GoodList,
       Scroll,
-      BackTop
+      // BackTop
     },
     mixins: [itemListenerMixin, backTopMixin],
     data() {
@@ -167,7 +167,8 @@
           // 完成上拉加载更多
           this.$refs.scroll.finishPullUp()
         })
-      }
+      },
+      
     }
   }
 </script>

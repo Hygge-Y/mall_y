@@ -1,44 +1,13 @@
 <template>
   <div>
     <scroll class="content">
-      <ul>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-        <li>8</li>
-      </ul>
+     
     </scroll>
   </div>
 </template>
 
 <script>
-  import Scroll from 'components/common/scroll/Scroll'
-
-
+import Scroll from 'components/common/scroll/Scroll'
   export default {
     name: "Profile",
     components: {
@@ -54,3 +23,7 @@
     overflow: hidden;
   }
 </style>
+
+
+
+

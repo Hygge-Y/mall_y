@@ -13,7 +13,7 @@
       <detail-comment-info ref="comment" :comment-info="commentInfo"/>
       <goods-list ref="recommend" :goods="recommends"/>
     </scroll>
-    <detail-bottom-bar/>
+    <detail-bottom-bar @addCart="addToCart"/>
     <!-- <back-top @click.native="backClick"/> -->
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
 
@@ -28,9 +28,9 @@
     import DetailGoodsInfo from './childComps/DetailGoodsInfo'
     import DetailParamInfo from './childComps/DetailParamInfo'
     import DetailCommentInfo from './childComps/DetailCommentInfo'
-
-
     import DetailBottomBar from './childComps/DetailBottomBar'
+
+
     import Scroll from 'components/common/scroll/Scroll'
     import GoodsList from 'components/content/goods/GoodsList'
 
@@ -40,8 +40,8 @@
     import {BACK_POSITION} from "common/const";
 
     export default {
-        name: "Detail",
-        components: {
+      name: "Detail",
+      components: {
             DetailNavBar,
             DetailSwiper,
             DetailBaseInfo,
@@ -54,8 +54,8 @@
             // BackTop,
             Scroll
         },
-        mixins: [itemListenerMixin, backTopMixin],
-        data() {
+      mixins: [itemListenerMixin, backTopMixin],
+      data() {
         return {
             iid: null,
             topImages: [],
@@ -73,7 +73,7 @@
             // itemImgListener: null
         }
     },
-    created() {
+      created() {
         //1.保存传入的iid
         this.iid = this.$route.params.iid
 
@@ -128,14 +128,14 @@
         
         
     },
-    mounted() {
-    },
-    updated() {
-    },
-    destroyed() {
+    // mounted() {
+    // },
+    // updated() {
+    // },
+      destroyed() {
         this.$bus.$off('itemImgLoad', this.itemImgListener)
-    },
-   methods: {
+      },
+    methods: {
       imageLoad() {
         const refresh = debouce(this.$refs.scroll.refresh, 100)
         this.refresh()
@@ -191,8 +191,29 @@
           // backClick() {
           //     this.$refs.scroll.scrollTo(0, 0, 300)
           // },
+
+
+      addToCart() {
+          // console.log('----');
+          //1.获取购物车需要展示的商品信息
+          const itemInfo = {}
+          itemInfo.image = this.topImages[0];
+          itemInfo.title = this.goods.title;
+          itemInfo.desc = this.goods.desc;
+          itemInfo.price = this.goods.realPrice;
+          itemInfo.iid = this.iid;
+          // product.image = this.topImages[0];
+          // product.title = this.goods.title;
+          // product.desc = this.goods.desc;
+          // product.price = this.goods.realPrice;
+          // product.iid = this.iid;
+
+          //2.将商品添加到购物车里
+          // this.$store.commit('addCart',product)
+          this.$store.dispatch('addCart', itemInfo)
+          }
         }
-      }
+  }
     
 
 
