@@ -24,7 +24,7 @@
     data() {
       return {
         scroll: null,
-        message: '小杨购物街'
+        message: '杨杨商城'
       }
     },
     mounted() {

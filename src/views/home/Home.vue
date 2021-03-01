@@ -1,6 +1,6 @@
 <template>
   <div id="home" class="wrapper">
-    <nav-bar class="home-nav"><div slot="center">小杨购物街</div></nav-bar>
+    <nav-bar class="home-nav"><div slot="center">杨杨商城</div></nav-bar>
     <tab-control :titles="['流行', '新款', '精选']"
                  @tabClick="tabClick"
                  ref="tabControl1"
@@ -40,7 +40,7 @@
   import {getHomeMultidata, getHomeGoods } from "network/home"
   import {debouce} from "common/utils";
   import {BACK_POSITION} from "common/const";
-  import {itemListenerMixin} from 'common/mixin'
+  import {itemListenerMixin, backTopMixin} from 'common/mixin'
 
 
   export default {
@@ -55,7 +55,7 @@
       Scroll,
       BackTop
     },
-    mixins: [itemListenerMixin],
+    mixins: [itemListenerMixin, backTopMixin],
     data() {
       return {
         banners: [],
@@ -67,7 +67,7 @@
         },
         // showGoods: [],
         currentType: 'pop',
-        isShowBackTop: false,
+        // isShowBackTop: false,
         tabOffsetTop: 0,
         isTabFixed: false,
         saveY: 0,
@@ -134,12 +134,12 @@
         this.$refs.tabControl2.currentIndex = index;
       },
       backClick() {
-        this.$refs.scroll.scrollTo(0, 0)
+        this.$refs.scroll.scrollTo(0, 0, 300)
       },
       contentScroll(position) {
         // 1.判断BackTop是否显示
-        this.isShowBackTop = (-position.y) > 1000
-
+        // this.isShowBackTop = (-position.y) > BACK_POSITION
+        this.listenShowBackTop(position)
         // 2.决定tabControl是否吸顶(position: fixed)
         this.isTabFixed = (-position.y) > this.tabOffsetTop
       },

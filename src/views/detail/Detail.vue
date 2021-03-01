@@ -1,7 +1,10 @@
 <template>
    <div id="detail">
-    <detail-nav-bar @titleClick="titleClick" class="detail-nav"/>
-    <scroll class="content" ref="scroll">
+    <detail-nav-bar @titleClick="titleClick" ref="nav"/>
+    <scroll class="content" 
+            ref="scroll" 
+            :probe-type="3" 
+            @scroll="contentScroll">
       <detail-swiper :top-images="topImages"/>
       <detail-base-info :goods="goods"/>
       <detail-shop-info :shop="shop"/>
@@ -10,6 +13,10 @@
       <detail-comment-info ref="comment" :comment-info="commentInfo"/>
       <goods-list ref="recommend" :goods="recommends"/>
     </scroll>
+    <detail-bottom-bar/>
+    <!-- <back-top @click.native="backClick"/> -->
+    <back-top @click.native="backClick" v-show="isShowBackTop"/>
+
   </div>
 </template>
 
@@ -23,14 +30,15 @@
     import DetailCommentInfo from './childComps/DetailCommentInfo'
 
 
-
+    import DetailBottomBar from './childComps/DetailBottomBar'
     import Scroll from 'components/common/scroll/Scroll'
     import GoodsList from 'components/content/goods/GoodsList'
 
     import {getDetail, Goods, Shop, GoodsParam, getRecommend} from 'network/detail';
     import {debouce} from 'common/utils'
-    import {itemListenerMixin} from 'common/mixin'
-    
+    import {itemListenerMixin, backTopMixin} from 'common/mixin'
+    import {BACK_POSITION} from "common/const";
+
     export default {
         name: "Detail",
         components: {
@@ -42,9 +50,11 @@
             DetailParamInfo,
             DetailCommentInfo,
             GoodsList,
+            DetailBottomBar,
+            // BackTop,
             Scroll
         },
-        mixins: [itemListenerMixin],
+        mixins: [itemListenerMixin, backTopMixin],
         data() {
         return {
             iid: null,
@@ -56,7 +66,10 @@
             commentInfo: {},
             recommends: [],
             themeTopYs: [],
-            getThemeTopY: null
+            getThemeTopY: null,
+            currentIndex: 0,
+            // isShowBackTop: false,
+
             // itemImgListener: null
         }
     },
@@ -104,11 +117,14 @@
         //4.给getThemeTop赋值(对给this.themeTopYs赋值的操作进行防抖)
         this.getThemeTopY = debouce(() => {
            this.themeTopYs = []
-               this.themeTopYs.push(0);
-               this.themeTopYs.push(this.$refs.params.$el.offsetTop);
-               this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
-               this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
-        })
+           this.themeTopYs.push(0);
+           this.themeTopYs.push(this.$refs.params.$el.offsetTop);
+           this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
+           this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
+           this.themeTopYs.push(Number.MAX_VALUE)
+
+           console.log(this.themeTopYs);
+        },1000)
         
         
     },
@@ -135,11 +151,51 @@
       },
       titleClick(index) {
         // console.log(index);
-        this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 100)
-      }
-    }
+        this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 200)
+      },
+      contentScroll(position) {
+        // console.log(position);
+        //1.获取y值
+        const positionY = -position.y
 
-}
+        //2.positionY和主题中值进行对比
+
+        // console.log(Number.MAX_VALUE);
+        let length = this.themeTopYs.length
+        for(let i = 0; i < length-1; i++) {
+          // console.log(i+1); // str 3+1=31
+          // if (positionY > this.themeTopYs[i] && positionY < this.themeTopYs[i+1]) {
+            // console.log(i);
+            // if (this.currentIndex !==i && ())
+            //hack做法:
+            if (this.currentIndex !== i && (positionY >= this.themeTopYs[i] 
+            && positionY < this.themeTopYs[i+1])) {
+               this.currentIndex = i;
+               this.$refs.nav.currentIndex = this.currentIndex;
+            }
+            //普通做法:
+            // if (this.currentIndex !== i && ((i < length - 1 && positionY >= this.themeTopYs[i] && positionY <
+            //     this.themeTopYs[i+1]) || (i === length - 1 && positionY >= this.themeTopYs[i]))) {
+            //   this.currentIndex = i;
+            //   // console.log(this.currentIndex);
+            //   this.$refs.nav.currentIndex = this.currentIndex;
+            }
+
+             // 1.判断BackTop是否显示
+            this.listenShowBackTop(position)
+          },
+          // demo() {
+          //   this.isShowBackTop = (-position.y) > BACK_POSITION;
+          // }
+        
+          // backClick() {
+          //     this.$refs.scroll.scrollTo(0, 0, 300)
+          // },
+        }
+      }
+    
+
+
 </script>
 
 <style scoped>
