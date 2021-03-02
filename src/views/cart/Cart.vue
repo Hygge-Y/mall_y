@@ -12,7 +12,7 @@
 import NavBar from 'components/common/navbar/NavBar'
 import CartList from './childComps/CartList'
 import BottomBar from './childComps/BottomBar' 
-import {mapGetters} from 'vuex' 
+import { mapGetters } from 'vuex' 
  export default {
 		name: "Cart",
     components: {

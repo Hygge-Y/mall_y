@@ -18,6 +18,13 @@
     computed: {
       //合计
 		  totalPrice() {
+        // return '￥' + thus.cartList.filter(item => {
+        //   return item .checked
+        // }).reduce((preValue, item) => {
+        //   return preValue + item.count * item.newPrice
+        // }, 0).toFixed(2)
+
+
         const cartList = this.$store.getters.cartList;
         return cartList.filter(item => {
           return item.checked
@@ -27,12 +34,15 @@
       },
       //全选
       isSelectAll: function () {
+        // return !(this.cartList.filter(item => !item.checked).length)
         return this.$store.getters.cartList.find(item => item.checked === false) === undefined;
       },
       //
-      // checkLength() {
+      checkLength() {
+        return this.cartList.filter(item => item.checked).legth
+        
       //   return this.$store.state.cartList.filter(item => item.checked).length
-      // }
+      }
     },
     methods: {
       checkBtnClick: function () {

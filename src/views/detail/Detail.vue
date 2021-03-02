@@ -5,6 +5,9 @@
             ref="scroll" 
             :probe-type="3" 
             @scroll="contentScroll">
+            <!-- 属性:topImages  传入值：top-images -->
+      <div>{{$store.state.cartList.length}}</div>
+
       <detail-swiper :top-images="topImages"/>
       <detail-base-info :goods="goods"/>
       <detail-shop-info :shop="shop"/>
@@ -196,21 +199,26 @@
       addToCart() {
           // console.log('----');
           //1.获取购物车需要展示的商品信息
-          const itemInfo = {}
-          itemInfo.image = this.topImages[0];
-          itemInfo.title = this.goods.title;
-          itemInfo.desc = this.goods.desc;
-          itemInfo.price = this.goods.realPrice;
-          itemInfo.iid = this.iid;
-          // product.image = this.topImages[0];
-          // product.title = this.goods.title;
-          // product.desc = this.goods.desc;
-          // product.price = this.goods.realPrice;
-          // product.iid = this.iid;
+          const product = {}
+          // itemInfo.image = this.topImages[0];
+          // itemInfo.title = this.goods.title;
+          // itemInfo.desc = this.goods.desc;
+          // itemInfo.price = this.goods.realPrice;
+          // itemInfo.iid = this.iid;
+         
+          product.image = this.topImages[0];
+          product.title = this.goods.title;
+          product.desc = this.goods.desc;
+          product.price = this.goods.realPrice;
+          product.iid = this.iid;
 
           //2.将商品添加到购物车里
           // this.$store.commit('addCart',product)
-          this.$store.dispatch('addCart', itemInfo)
+          // this.$store.dispatch('addCart', product)
+            this.$store.dispatch('addToCart', product).then(res => {
+              console.log(res);
+            })
+          //3.添加到购物车成功
           }
         }
   }

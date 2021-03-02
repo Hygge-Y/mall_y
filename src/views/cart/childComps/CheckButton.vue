@@ -45,7 +45,7 @@
   }
 
   .selector-active {
-    background-color: #ff8198;
-    border-color: #ff8198;
+    background-color: #1A73E8;
+    border-color: #1A73E8;
   }
 </style>

@@ -11,8 +11,8 @@
       <div class="item-title">{{itemInfo.title}}</div>
       <div class="item-desc">商品描述: {{itemInfo.desc}}</div>
       <div class="info-bottom">
-        <div class="item-price left">¥{{itemInfo.newPrice}}</div>
-        <div class="item-count right">x{{itemInfo.count}}</div>
+      <div class="item-price left">¥{{itemInfo.newPrice}}</div>
+      <div class="item-count right">x{{itemInfo.count}}</div>
       </div>
     </div>
   </div>
@@ -103,6 +103,6 @@
   }
 
   .info-bottom .item-price {
-    color: orangered;
+    color: #1A73E8;
   }
 </style>
