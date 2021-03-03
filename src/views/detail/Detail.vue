@@ -19,7 +19,7 @@
     <detail-bottom-bar @addCart="addToCart"/>
     <!-- <back-top @click.native="backClick"/> -->
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
-
+    <!-- <toast :message="message" :show="isShow"/> -->
   </div>
 </template>
 
@@ -36,12 +36,21 @@
 
     import Scroll from 'components/common/scroll/Scroll'
     import GoodsList from 'components/content/goods/GoodsList'
+    import Toast from 'components/common/toast/Toast'
 
     import {getDetail, Goods, Shop, GoodsParam, getRecommend} from 'network/detail';
     import {debouce} from 'common/utils'
     import {itemListenerMixin, backTopMixin} from 'common/mixin'
     import {BACK_POSITION} from "common/const";
-
+    import { mapActions } from "vuex"
+    
+    // export default {
+    //   methods: {
+    //     ...mapActions([
+    //       'nameOfAction', //also supports payload `this.nameOfAction(amount)` 
+    //     ])
+    //   }
+    // };
     export default {
       name: "Detail",
       components: {
@@ -55,6 +64,7 @@
             GoodsList,
             DetailBottomBar,
             // BackTop,
+            // Toast,
             Scroll
         },
       mixins: [itemListenerMixin, backTopMixin],
@@ -71,6 +81,8 @@
             themeTopYs: [],
             getThemeTopY: null,
             currentIndex: 0,
+            message: '',
+            // show: false
             // isShowBackTop: false,
 
             // itemImgListener: null
@@ -139,6 +151,7 @@
         this.$bus.$off('itemImgLoad', this.itemImgListener)
       },
     methods: {
+      ...mapActions(['addCart']),
       imageLoad() {
         const refresh = debouce(this.$refs.scroll.refresh, 100)
         this.refresh()
@@ -212,12 +225,27 @@
           product.price = this.goods.realPrice;
           product.iid = this.iid;
 
-          //2.将商品添加到购物车里
+          //2.将商品添加到购物车里(1.promise 2.mapActions)
+          this.addCart(product).then(res => {
+            // this.show = true;
+            // this.message = res;
+
+            // setTimeout(() => {
+            //   this.show = false;
+            //   this.message = ''
+            // },1500)
+
+            // this.$toast.show(res, 1500)
+            this.$toast.show()
+            console.log(this.$toast);
+            // this.$toast.show(res, 2000)
+          })
           // this.$store.commit('addCart',product)
-          // this.$store.dispatch('addCart', product)
-            this.$store.dispatch('addToCart', product).then(res => {
-              console.log(res);
-            })
+         
+          // // this.$store.dispatch('addCart', product)
+          //   // this.$store.dispatch('addToCart', product).then(res => {
+          //     console.log(res);
+          //   })
           //3.添加到购物车成功
           }
         }
