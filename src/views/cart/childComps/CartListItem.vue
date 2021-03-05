@@ -2,7 +2,7 @@
   <div id="shop-item">
     <div class="item-selector">
       <check-button :is-checked="itemInfo.checked" @click.native="checkClick"></check-button>
-      <!-- <CheckButton @checkBtnClick="checkedChange" v-model="itemInfo.checked"></CheckButton> -->
+      <!-- <check-button :is-checked="itemInfo.checked" @checkBtnClick="checkedChange" v-model="itemInfo.checked"></check-button> -->
     </div>
     <div class="item-img">
       <img :src="itemInfo.image" alt="商品图片">
@@ -11,7 +11,7 @@
       <div class="item-title">{{itemInfo.title}}</div>
       <div class="item-desc">商品描述: {{itemInfo.desc}}</div>
       <div class="info-bottom">
-      <div class="item-price left">¥{{itemInfo.newPrice}}</div>
+      <div class="item-price left">¥{{itemInfo.price}}</div>
       <div class="item-count right">x{{itemInfo.count}}</div>
       </div>
     </div>
@@ -37,9 +37,15 @@
     },
     methods: {
       checkClick() {
-        this.itemInfo.checked = !this.itemInfo.checked
+        this.itemInfo.checked = !this.itemInfo.checked;
+        
+        // if(this.itemInfo.checked){
+        // this.state.cartList.cartLeng++;
+        // } else {
+        // this.state.cartList.cartLeng--;
+        // }
       }
-      // checkedChange: function () {
+      // checkedChange() {
       //   this.itemInfo.checked = !this.itemInfo.checked;
       // }
     }
@@ -103,6 +109,6 @@
   }
 
   .info-bottom .item-price {
-    color: #1A73E8;
+    color: #666;
   }
 </style>

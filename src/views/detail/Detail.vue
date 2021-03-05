@@ -6,7 +6,7 @@
             :probe-type="3" 
             @scroll="contentScroll">
             <!-- 属性:topImages  传入值：top-images -->
-      <div>{{$store.state.cartList.length}}</div>
+      <!-- <div>{{$store.state.cartList.length}}</div> -->
 
       <detail-swiper :top-images="topImages"/>
       <detail-base-info :goods="goods"/>

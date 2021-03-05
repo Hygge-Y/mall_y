@@ -24,7 +24,7 @@ export default {
         }
     },
     methods: {
-        show(message='默认文字', duration=2000) {
+        show(message='添加至购物车', duration=2000) {
             this.isShow = true;
             this.message = message
 

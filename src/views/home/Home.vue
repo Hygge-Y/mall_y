@@ -1,6 +1,6 @@
 <template>
   <div id="home" class="wrapper">
-    <nav-bar class="home-nav"><div slot="center">杨杨商城</div></nav-bar>
+    <nav-bar class="home-nav"><div slot="center">小杨商城</div></nav-bar>
     <tab-control :titles="['流行', '新款', '精选']"
                  @tabClick="tabClick"
                  ref="tabControl1"

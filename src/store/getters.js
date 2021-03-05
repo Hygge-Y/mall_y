@@ -5,7 +5,7 @@ const getters = {
   cartList(state) {
     return state.cartList
   }
-  // cartCount(state, getters) {
+  // cartCount---cartLength(state, getters) {
   //   return getters.cartList.length
   // }
 }

@@ -3,7 +3,7 @@
     <check-button class="select-all" @checkBtnClick="checkBtnClick" v-model="isSelectAll"></check-button>
     <span>全选</span>
     <span class="total-price">合计: ¥{{totalPrice}}</span>
-    <span class="buy-product" @click="calcClick">去计算({{$store.getters.cartCount}})</span>
+    <span class="buy-product" @click="calcClick">去计算({{$store.getters.cartLength}})</span>
   </div>
 </template>
 
@@ -29,7 +29,7 @@
         return cartList.filter(item => {
           return item.checked
         }).reduce((preValue, item) => {
-          return preValue + item.count * item.newPrice
+          return preValue + item.count * item.price
         }, 0).toFixed(2)
       },
       //全选
