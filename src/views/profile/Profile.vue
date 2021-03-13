@@ -8,19 +8,19 @@
     <section class="account">
       <div class="account-item">
         <div class="number">
-          <span class="balance">0.00</span>元
+          <span class="balance">999999.00</span>元
         </div>
         <div class="account-info">我的余额</div>
       </div>
       <div class="account-item">
         <div class="number">
-          <span class="balance">0</span>个
+          <span class="balance">999</span>个
         </div>
         <div class="account-info">我的优惠</div>
       </div>
       <div class="account-item">
         <div class="number">
-          <span class="balance">0</span>分
+          <span class="balance">999</span>分
         </div>
         <div class="account-info">我的积分</div>
       </div>
@@ -85,7 +85,7 @@
   .account-item .balance {
     font-size: 24px;
     font-weight: 700;
-    color: #1A73E8;
+    color: #3974c2;
   }
 
   .account-info {

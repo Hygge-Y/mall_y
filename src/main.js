@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+// import VueAxios from 'vue-axios';
+// import axios from 'axios';
+
 
 import FastClick from 'fastclick'
 import VueLazyLoad from 'vue-lazyload'
@@ -9,6 +12,9 @@ import VueLazyLoad from 'vue-lazyload'
 import toast from 'components/common/toast'
 
 Vue.config.productionTip = false
+
+
+// Vue.prototype.$axios = axios;
 
 //添加事件总线对象
 Vue.prototype.$bus = new Vue()

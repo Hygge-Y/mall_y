@@ -25,6 +25,7 @@ export default {
     }
 
     .check {
-        border-color: red;
+        border-color: #1A73E8;
+        background-color: #1A73E8;
     }
 </style>

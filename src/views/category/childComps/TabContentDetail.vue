@@ -1,5 +1,7 @@
 <template>
   <grid-view>
+    <!-- <goods-list-item v-for="(item, index) in goodsList" :key="index" :goods="item"></goods-list-item> -->
+
     <goods-list-item v-for="(item, index) in categoryDetail" :key="index" :goods="item"></goods-list-item>
   </grid-view>
 </template>
@@ -7,8 +9,9 @@
 <script>
   import GridView from 'components/common/gridView/GridView'
   import GoodsListItem from 'views/home/childComps/GoodsListItem'
-
-  export default {
+  // import GoodsList from 'views/home/childComps/GoodsList'
+ 
+ export default {
     name: "TabContentDetail",
     components: {
       GridView,

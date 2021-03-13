@@ -2,8 +2,8 @@
   <div id="category" ref="aaaa">
     <nav-bar class="nav-bar"><div slot="center">商品分类</div></nav-bar>
     <div class="content">
-      <tab-menu :categories="categories"
-                @selectItem="selectItem"></tab-menu>
+      <tab-menu :categories="categories"/>
+                <!-- :@selectItem="selectItem"></tab-menu> -->
 
       <scroll id="tab-content" :data="[categoryData]">
         <div>
@@ -11,6 +11,69 @@
           <tab-control :titles="['综合', '新品', '销量']"
                        @itemClick="tabClick"></tab-control>
           <tab-content-detail :category-detail="showCategoryDetail"></tab-content-detail>
+          <!-- <ul>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li><li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li><li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+
+          </ul> -->
         </div>
       </scroll>
     </div>
@@ -26,16 +89,22 @@
 
 <script>
   import BScroll from 'better-scroll'
+  import {getCategory, getSubcategory, getCategoryDetail } from "network/category"
 
+  import GridView from 'components/common/gridView/GridView'
   import NavBar from 'components/common/navbar/NavBar'
+  
   import {POP, SELL, NEW} from "@/common/const";
   import {backTopMixin} from 'common/mixin'
-  import TabMenu from './childComps/TabMenu'
+  import {tabControlMixin} from "@/common/mixin";
+  
   import TabControl from 'components/content/tabControl/TabControl'
   import Scroll from 'components/common/scroll/Scroll'
+  
+  import TabMenu from './childComps/TabMenu'
   import TabContentCategory from './childComps/TabContentCategory'
   import TabContentDetail from './childComps/TabContentDetail'
-  import {tabControlMixin} from "@/common/mixin";
+  
   export default {
     name: "Category",
     mixins: [backTopMixin,tabControlMixin],
@@ -102,7 +171,8 @@
             }
           }
           // 3.请求第一个分类的数据
-          this._getSubcategories(0)
+          // this._getSubcategories(0)
+            // this._getSubcategory(0)
         })
       }
   },
@@ -115,6 +185,7 @@
           this._getCategoryDetail(POP)
           this._getCategoryDetail(SELL)
           this._getCategoryDetail(NEW)
+          // vm.$data._getCategoryDetail(POP)
         })
       },
       _getCategoryDetail(type) {
@@ -130,9 +201,9 @@
       /**
        * 事件响应相关的方法
        */
-      selectItem(index) {
-        this._getSubcategories(index)
-      }
+      // selectItem(index) {
+      //   this._getSubcategories(index)
+      // }
     
 }
   
